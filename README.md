@@ -1,6 +1,6 @@
 # react-native-bluetooth
 
-React Native native module for checking Bluetooth state with event listener. Supports both iOS and android.
+React Native module for checking Bluetooth state with event listener. Supports both iOS and android.
 
 ## Installation
 
