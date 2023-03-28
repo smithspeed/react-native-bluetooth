@@ -11,7 +11,7 @@ export default function App() {
         checkBluetoothStatus();
 
         return () => {
-            console.log('unmount');
+            //console.log('unmount');
             //RNBluetooth.removeEventListener("change",handleConnection)
         }
 
@@ -19,9 +19,19 @@ export default function App() {
 
     const checkBluetoothStatus = async () => {
 
-        //let status = await RNBluetooth.getStatus();
-        let dx = RNBluetooth.addEventListener("change",handleConnection)
-        //dx.remove();
+        let data = await RNBluetooth.getStatus({
+            requestToEnable : true
+        });
+
+        let obj = JSON.parse(data.data);
+        
+        //console.log(obj['status']);
+        setResult(obj['status']);
+        
+    }
+
+    const listenOnChangeBluetoothState = () => {
+        RNBluetooth.addEventListener("change",handleConnection)
     }
 
     const removeListener = () => {
@@ -30,14 +40,17 @@ export default function App() {
     }
 
     handleConnection = (resp) => {
-        let {connectionState} = resp.type;  
-        console.log('type ', connectionState);
+        //let {connectionState} = resp.type;  
+        console.log('type ', resp);
     }
 
     return (
         <View style={styles.container}>
             <Text>Result: {result}</Text>
-            <Button title='Remove Listener' onPress={() => removeListener()} />
+            <Text></Text>
+            <Button title='Remove Listener' style={{marginBottom:20}} onPress={() => removeListener()} />
+            <Text></Text>
+            <Button title='Add Listener' onPress={() => listenOnChangeBluetoothState()} />
         </View>
     );
 }

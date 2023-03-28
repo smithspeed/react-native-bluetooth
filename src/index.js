@@ -20,7 +20,7 @@ const Bluetooth = NativeModules.Bluetooth
 
 const BluetoothInfoEventEmitter = new NativeEventEmitter(Bluetooth);
 
-const DEVICE_CONNECTIVITY_EVENT = 'bluetoothDidUpdateState';
+const CONNECTIVITY_EVENT = 'bluetoothDidUpdateState';
 
 const _subscriptions = new Map();
 
@@ -32,11 +32,9 @@ const RNBluetooth = {
 
         if (eventName === 'change') {
             listener = BluetoothInfoEventEmitter.addListener(
-                DEVICE_CONNECTIVITY_EVENT,
+                CONNECTIVITY_EVENT,
                 (appStateData) => {
-                    handler({
-                        type: appStateData,
-                    });
+                    handler(appStateData);
                 }
             );
         }
@@ -46,23 +44,23 @@ const RNBluetooth = {
                 remove: () => {}
             };
         }
-        
-        console.log('1111:',listener);
 
         _subscriptions.set(handler, listener);
+
         return {
             remove: () => RNBluetooth.removeEventListener(eventName, handler)
         };
     },
     removeEventListener: (eventName, handler) => {
-        console.log('dddd')
+       
         const listener = _subscriptions.get(handler);
         
         if (!listener) {
             return;
         }
-        console.log('listener',listener);
+        
         listener.remove();
+
         _subscriptions.delete(handler);
     },
     getStatus: (options={}) => {
