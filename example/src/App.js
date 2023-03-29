@@ -23,10 +23,12 @@ export default function App() {
             requestToEnable : true
         });
 
-        let obj = JSON.parse(data.data);
+        console.log(data);
+
+        //let obj = JSON.parse(data.data);
         
         //console.log(obj['status']);
-        setResult(obj['status']);
+        //setResult(obj['status']);
         
     }
 
