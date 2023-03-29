@@ -1,21 +1,21 @@
-# react-native-bluetooth
+# react-native-instantpay-bluetooth
 
 React Native module for checking Bluetooth state with event listener. Supports both iOS and android.
 
 ## Installation
 
 ```sh
-npm install react-native-bluetooth
+npm install react-native-instantpay-bluetooth
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-bluetooth';
+import RNBluetooth from 'react-native-instantpay-bluetooth';
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await RNBluetooth.getStatus();
 ```
 
 ## Contributing
@@ -26,6 +26,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 MIT
 
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
