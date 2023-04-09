@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, Button } from 'react-native';
-import RNBluetooth from 'react-native-bluetooth';
+import RNBluetooth from 'react-native-instantpay-bluetooth';
 import { useState, useEffect } from 'react';
 
 export default function App() {
@@ -21,14 +21,18 @@ export default function App() {
 
         let data = await RNBluetooth.getStatus({
             requestToEnable : true
+        }).catch(err => {
+
+            console.log("err",err);
+            throw err;
         });
 
         console.log(data);
 
-        //let obj = JSON.parse(data.data);
+        let obj = JSON.parse(data.data);
         
-        //console.log(obj['status']);
-        //setResult(obj['status']);
+        console.log(obj['status']);
+        setResult(obj['status']);
         
     }
 
